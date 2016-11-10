@@ -1,0 +1,23 @@
+// http://projects.skurfer.com/QuicksilverPlug-inReference.mdown
+
+class QTObject {
+  get uti() {}
+
+  get displayName() {}
+  get displayDetails() {}
+
+
+}
+
+QTMoveTo extends QTAction {
+  directUTI: ['public.item']
+  indirectUTI: ['public.folder']
+  constructor(qtSubject)
+}
+
+class FileSource extends QTObjectSource {
+  get items() {
+    return getDirectoryContent('/System/Library/PreferencePanes/')
+      .then(processSomehow)
+  }
+}

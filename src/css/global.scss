@@ -1,0 +1,9 @@
+@import "reset";
+@import "defaults";
+
+:global {
+  strong {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}
