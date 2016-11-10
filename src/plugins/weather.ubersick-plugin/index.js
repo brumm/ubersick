@@ -2,7 +2,6 @@ import React from 'react'
 import css from './style.scss'
 import weather from 'weather-js'
 import Pinky from 'react-pinky-promise'
-import isEqual from 'lodash/isEqual'
 
 const fetchWeather = search => (
   new Promise((resolve, reject) => (
@@ -15,14 +14,9 @@ const fetchWeather = search => (
 
 export default class Bar extends React.Component {
 
-  shouldComponentUpdate({ style }) {
-    return isEqual(style, this.props.style)
-  }
-
   render() {
-    const { _grid, children, ...otherProps } = this.props
     return (
-      <div {...otherProps} className={css.container}>
+      <div className={css.container}>
         <Pinky promise={fetchWeather('Cologne, Germany')}>
           {({ pending, resolved, rejected }) => resolved ? (
             <div>
@@ -32,7 +26,6 @@ export default class Bar extends React.Component {
             <div>Loading...</div>
           )}
         </Pinky>
-        {children}
       </div>
     )
   }

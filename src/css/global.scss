@@ -2,8 +2,8 @@
 @import "defaults";
 
 :global {
-  strong {
-    font-weight: bold;
-    text-decoration: underline;
+  .react-grid-placeholder {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   }
 }

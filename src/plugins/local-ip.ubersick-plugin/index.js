@@ -4,11 +4,9 @@ import ip from 'ip'
 
 export default class Bar extends React.Component {
   render() {
-    const { _grid, children, ...otherProps } = this.props
     return (
-      <div {...otherProps} className={css.container}>
+      <div className={css.container}>
         <h2>{ip.address()}</h2>
-        {children}
       </div>
     )
   }

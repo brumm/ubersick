@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "babel-core": "^6.18.2",
+    "electron": "^1.4.6",
     "electron-irpc": "0.0.2",
     "electron-window-state": "^3.0.3",
     "flex-component": "^0.1.3",
