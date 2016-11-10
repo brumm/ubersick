@@ -18,25 +18,29 @@ let mainWindow
 
 // irpcMain.addFunction('getDirectoryContent', getDirectoryContent)
 
+function toggleWindowLevel() {
+  const pool = $.NSAutoreleasePool('alloc')('init')
+  const handle = mainWindow.getNativeWindowHandle()
+  const nsView = require('nodobjc/lib/core').wrapValue(handle.readPointer(0), '@')
+  const nsWindow = nsView('window')
+  const desktopLevel = $.kCGDesktopWindowLevel - 1
+
+  if (nsWindow('level') === desktopLevel) {
+    nsWindow('setLevel', 0)
+     mainWindow.webContents.send('interactive-mode', true)
+  } else {
+    nsWindow('setLevel', desktopLevel)
+    mainWindow.webContents.send('interactive-mode', false)
+  }
+
+  pool('drain')
+}
+
 function createWindow () {
   let { width, height } = screen.getPrimaryDisplay().workAreaSize
 
   globalShortcut.register(SHORTCUT_TOGGLE, () => {
-    const pool = $.NSAutoreleasePool('alloc')('init')
-    const handle = mainWindow.getNativeWindowHandle()
-    const nsView = require('nodobjc/lib/core').wrapValue(handle.readPointer(0), '@')
-    const nsWindow = nsView('window')
-    const desktopLevel = $.kCGDesktopWindowLevel - 1
-
-    if (nsWindow('level') === desktopLevel) {
-      nsWindow('setLevel', 0)
-      console.log(nsWindow('level'))
-    } else {
-      nsWindow('setLevel', desktopLevel)
-      console.log(nsWindow('level'))
-    }
-
-    pool('drain')
+    toggleWindowLevel()
   })
 
   mainWindow = new BrowserWindow({
