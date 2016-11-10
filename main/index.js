@@ -5,6 +5,7 @@ import $ from 'nodobjc'
 $.framework('Foundation')
 $.framework('AppKit')
 
+app.dock.hide()
 
 const irpcMain = irpc.main()
 const { DEV, PORT = '8080' } = process.env
