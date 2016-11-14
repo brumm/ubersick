@@ -13,18 +13,16 @@ const fetchWeather = search => (
 )
 
 export default class Bar extends React.Component {
-
   render() {
     return (
       <div className={css.container}>
         <Pinky promise={fetchWeather('Cologne, Germany')}>
-          {({ pending, resolved, rejected }) => resolved ? (
-            <div>
-              <div>{resolved[0].current.skytext}, feels like {resolved[0].current.feelslike}º</div>
-            </div>
-            ) : (
-            <div>Loading...</div>
-          )}
+          {({ resolved: forecast = this.forecast }) => {
+            this.forecast = forecast
+            return forecast ? (
+              <div>{forecast[0].current.skytext}, feels like {forecast[0].current.feelslike}º</div>
+            ) : null
+          }}
         </Pinky>
       </div>
     )

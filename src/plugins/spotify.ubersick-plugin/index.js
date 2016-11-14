@@ -15,20 +15,23 @@ const fetchSpotifyStatus = () => (
 )
 
 export default class Bar extends React.Component {
+  status = {
+    track: {
+      artist_resource: { name: 'Artist' },
+      track_resource: { name: 'Track' },
+    }
+  }
 
   render() {
     return (
       <div className={css.container}>
         <Pinky promise={fetchSpotifyStatus()}>
-          {({ pending, resolved, rejected }) => resolved ? (
-            <div>
-              <div>
-                {`${resolved.track.artist_resource.name} — ${resolved.track.track_resource.name}`}
-              </div>
-            </div>
-            ) : (
-            <div>Loading...</div>
-          )}
+          {({ resolved: status = this.status }) => {
+            this.status = status
+            return (
+              <div>{`${status.track.artist_resource.name} — ${status.track.track_resource.name}`}</div>
+            )
+          }}
         </Pinky>
       </div>
     )
