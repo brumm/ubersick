@@ -1,0 +1,26 @@
+sketch-esque positioning
+  smart alignment guides
+  alignment inside wrapper (text)
+  change anchor
+
+interactive mode
+  explore interaction possibilities
+
+edit mode
+  'Done' button
+  pretty highlighting for widgets
+  show controls attached to widgets
+  search/add new widgets from desktop
+  choose screen for plugin
+
+widgets
+  some kind of registry
+  explore `apm` as plugin mechanism
+  embed dev server instead of bundling?
+  declare update interval? or handle yourself?
+  put widgets into their own repos eventually
+
+tray icon
+  reload
+  devtools
+  quit
