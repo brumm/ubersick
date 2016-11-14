@@ -48,12 +48,14 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    this.interval = setInterval(::this.forceUpdate, 1000 * 60)
     ipcRenderer.on('interactive-mode', (event, isInteractive) => (
       this.setState({ isInteractive })
     ))
   }
 
   componentWillUnmount() {
+    clearInterval(this.interval)
     ipcRenderer.removeAllListeners()
   }
 
