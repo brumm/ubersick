@@ -2,45 +2,12 @@ import React from 'react'
 import css from 'components/App/App.scss'
 import ReactGridLayout from 'react-grid-layout'
 import { ipcRenderer } from 'electron'
-import isEqual from 'lodash/isEqual'
 import idbKeyval from 'idb-keyval'
 
 import 'react-resizable/css/styles.css'
+import PluginWrapper from 'components/PluginWrapper/PluginWrapper'
 
 const req = require.context("../../plugins", true, /.ubersick-plugin\/\index\.js/)
-
-class PluginWrapper extends React.Component {
-
-  shouldComponentUpdate({ style, isInteractive }) {
-    return (
-      isEqual(style, this.props.style) ||
-      isEqual(isInteractive, this.props.isInteractive)
-    )
-  }
-
-  render() {
-    const {
-      children,
-      isInteractive,
-      component,
-      ...otherProps
-    } = this.props
-
-    otherProps.style = {
-      ...otherProps.style,
-      display: 'flex',
-      alignItems: 'center',
-      border: isInteractive ? '1px solid white' : undefined
-    }
-
-    return (
-      <div {...otherProps}>
-        {component}
-        {children}
-      </div>
-    )
-  }
-}
 
 export default class App extends React.Component {
   state = {
