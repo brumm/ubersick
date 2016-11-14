@@ -11,11 +11,15 @@ const req = require.context("../../plugins", true, /.ubersick-plugin\/\index\.js
 
 export default class App extends React.Component {
   state = {
-    isInteractive: false
+    isInteractive: false,
+    now: Date.now()
   }
 
   componentDidMount() {
-    this.interval = setInterval(::this.forceUpdate, 1000 * 60)
+    this.interval = setInterval(() => (
+      this.setState({ now: Date.now() })
+    ), 1000 * 30)
+
     ipcRenderer.on('interactive-mode', (event, isInteractive) => (
       this.setState({ isInteractive })
     ))
@@ -46,7 +50,7 @@ export default class App extends React.Component {
         {modules.map(req).map((Komponent, index) => (
           <PluginWrapper
             key={modules[index]}
-            component={<Komponent />}
+            component={<Komponent now={this.state.now} />}
             isInteractive={isInteractive}
             data-grid={layout[modules[index]]}
           />
